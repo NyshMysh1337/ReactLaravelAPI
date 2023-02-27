@@ -68,13 +68,14 @@ export const addCourses = createAsyncThunk(
 
             const data = await response.json();
 
-            const postMaterial = {
-                post,
-                id: data.id
-            }
+            // const postMaterial = {
+            //     post,
+            //     id: data.id
+            // }
 
             // dispatch(addMaterials(postMaterial))
             dispatch(createCourses(data));
+            return data
         } catch (error) {
             return rejectWithValue(error.message)
         }

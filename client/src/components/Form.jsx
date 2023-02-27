@@ -9,21 +9,37 @@ const Form = () => {
 
     const postForm = async (data) => {
         const formData = new FormData();
-        for (let i = 0; i < data.materials.length; i++) {
-            formData.append('courses_id', '17');
-            formData.append('material', data.materials[i]);
-            await fetch('http://127.0.0.1:8000/api/material/create', {
-                method: 'POST',
-                body: formData
-            })
-        }
+        // for (let i = 0; i < data.materials.length; i++) {
+        //     formData.append('courses_id', '17');
+        //     formData.append('material', data.materials[i]);
+        //     await fetch('http://127.0.0.1:8000/api/material/create', {
+        //         method: 'POST',
+        //         body: formData
+        //     })
+        // }
 
         const post = {
             materials: formData,
             courses: data
         }
+
+        const addingCourses = await dispatch(addCourses(post));
+        const {id} = addingCourses.payload.data;
+        // debugger
+        // console.log(addingCourses.payload.data.id)
+        for (let i = 0; i < data.materials.length; i++) {
+            formData.append('courses_id', id);
+            formData.append('name', data.name);
+            formData.append('material', data.materials[i]);
+            const response = await fetch('http://127.0.0.1:8000/api/material/create', {
+                method: 'POST',
+                body: formData
+            })
+        }
+
+
         // dispatch(addMaterials(post))
-        dispatch(addCourses(post));
+        // dispatch(addCourses(post));
     }
 
     const {
@@ -102,6 +118,19 @@ const Form = () => {
             </div>
 
             <label>
+                Имя:
+                <input
+                    {...register('name', {
+                        required: "Это поле обязательно для заполнения!",
+                        minLength: {
+                            value: 5,
+                            message: "Имя для файла/файлов должено быть минимум 5 символов"
+                        }
+                    })}
+                />
+            </label>
+
+            <label>
                 Материалы:
                 <input
                     type={'file'}
@@ -110,7 +139,6 @@ const Form = () => {
                     {...register('materials')}
                 />
             </label>
-
 
             <input type="submit" />
         </form>
