@@ -18,7 +18,7 @@ const CoursesItem = ({title, id}) => {
         <div>
             <div className="courses">
                 <div className="courses_content">
-                    <span>{title}</span>
+                    <span>{id}. {title}</span>
                 </div>
 
                 <div className="courses_btn">

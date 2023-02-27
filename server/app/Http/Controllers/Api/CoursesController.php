@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Courses\StoreRequest;
 use App\Http\Resources\CoursesResource;
 use App\Models\Courses;
+use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
-class CoursesController extends Controller
+class CoursesController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +20,9 @@ class CoursesController extends Controller
      */
     public function index()
     {
+
         return CoursesResource::collection(Courses::with('materials')->get());
+//        $this->service->index();
     }
 
     /**
@@ -31,7 +35,9 @@ class CoursesController extends Controller
     {
         $courses = Courses::create($request->validated());
 
+
         return new CoursesResource($courses);
+//        $this->service->store($request);
     }
 
     /**

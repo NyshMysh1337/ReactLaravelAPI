@@ -32,7 +32,7 @@ function App() {
 
     <Form />
 
-        <div style={{margin: 20}}><Mat/></div>
+        {/*<div style={{margin: 20}}><Mat/></div>*/}
 
 
 

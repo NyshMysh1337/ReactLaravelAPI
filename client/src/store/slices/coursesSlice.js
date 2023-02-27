@@ -47,28 +47,62 @@ export const deleteCourses = createAsyncThunk(
 
 export const addCourses = createAsyncThunk(
     'courses/addCourses',
-    async function(courses, {rejectWithValue, dispatch}) {
+    async function(post, {rejectWithValue, dispatch}) {
         try{
             const response = await fetch('http://127.0.0.1:8000/api/courses', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify(courses)
+                body: JSON.stringify(post.courses)
             })
 
             if (!response.ok) {
                 throw new Error('Can\'t add courses. Server error!');
             }
 
+            // for (let i = 0; i < post.courses.materials.length; i++) {
+            //     post.formData.append('courses_id', data.id);
+            //     post.formData.append('material', post.courses.materials[i]);
+            // }
+
             const data = await response.json();
-            console.log(data);
+
+            const postMaterial = {
+                post,
+                id: data.id
+            }
+
+            // dispatch(addMaterials(postMaterial))
             dispatch(createCourses(data));
         } catch (error) {
             return rejectWithValue(error.message)
         }
     }
 )
+
+// export const addMaterials = createAsyncThunk(
+//     'courses/addMaterials',
+//     async function({data, formData, id}, {rejectWithValue}) {
+//         try {
+//             for (let i = 0; i < data.materials.length; i++) {
+//                 formData.append('courses_id', id);
+//                 formData.append('material', data.materials[i]);
+//                 const response = await fetch('http://127.0.0.1:8000/api/material/create', {
+//                     method: 'POST',
+//                     body: formData
+//                 })
+//
+//                 if (!response.ok) {
+//                     throw new Error('Can\'t add courses. Server error!');
+//                 }
+//             }
+//         } catch (error) {
+//             return rejectWithValue(error.message)
+//         }
+//
+//     }
+// )
 
 const setError = (state, action) => {
     state.status = 'rejected'
@@ -89,7 +123,7 @@ const coursesSlice = createSlice({
         }
     },
     extraReducers: {
-        [fetchCourses.pending]: (state, action) => {
+        [fetchCourses.pending]: (state) => {
             state.status = 'loading'
             state.error = null
         },

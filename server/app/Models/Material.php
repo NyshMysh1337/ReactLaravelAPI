@@ -9,4 +9,6 @@ class Material extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
 }

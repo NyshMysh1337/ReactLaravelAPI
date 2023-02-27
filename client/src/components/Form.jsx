@@ -1,15 +1,30 @@
 import React, {useRef} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {addCourses} from "../store/slices/coursesSlice";
+import {addCourses, addMaterials} from "../store/slices/coursesSlice";
 
 const Form = () => {
 
     const dispatch = useDispatch();
 
-    const fileComponent = useRef();
+    const postForm = async (data) => {
+        const formData = new FormData();
+        for (let i = 0; i < data.materials.length; i++) {
+            formData.append('courses_id', '17');
+            formData.append('material', data.materials[i]);
+            await fetch('http://127.0.0.1:8000/api/material/create', {
+                method: 'POST',
+                body: formData
+            })
+        }
 
-
+        const post = {
+            materials: formData,
+            courses: data
+        }
+        // dispatch(addMaterials(post))
+        dispatch(addCourses(post));
+    }
 
     const {
         register,
@@ -17,24 +32,10 @@ const Form = () => {
             errors
         },
         handleSubmit
-    } = useForm({
-        mode: 'onBlur'
-    });
-    const postForm = (data) => {
-        // console.log(fileComponent.current.files)
-        dispatch(addCourses(data));
-    }
-
-    // const [file, setFile] = useState(null);
-
-
-    // const handleClick = (e) => {
-    //     setFile(e.target.files);
-    //     console.log(file)
-    // }
+    } = useForm();
 
     return (
-        <form onSubmit={handleSubmit(postForm)}>
+        <form onSubmit={handleSubmit(postForm)} encType="multipart/form-data">
             <label>
                 Title:
                 <input
@@ -100,22 +101,16 @@ const Form = () => {
                 }
             </div>
 
-            {/*<label>*/}
-            {/*    Материалы:*/}
-            {/*    <input*/}
-            {/*        type={'file'}*/}
-            {/*        multiple*/}
-            {/*        // ref={fileComponent}*/}
-            {/*        {...register('materials', {*/}
-            {/*            required: "Это поле обязательно для заполнения!",*/}
-            {/*        })}*/}
-            {/*    />*/}
-            {/*</label>*/}
-            {/*<div style={{height: 40}}>*/}
-            {/*    {errors?.materials &&*/}
-            {/*        <p style={{color: 'red'}}>{errors?.materials?.message || "Error!"}</p>*/}
-            {/*    }*/}
-            {/*</div>*/}
+            <label>
+                Материалы:
+                <input
+                    type={'file'}
+                    multiple
+                    name='materials'
+                    {...register('materials')}
+                />
+            </label>
+
 
             <input type="submit" />
         </form>

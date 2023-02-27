@@ -1,31 +1,39 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import axios from "axios";
 
 const Mat = () => {
 
-    // const [materials, setMaterials] = useState([]);
+    const [file, setFile] = useState()
 
-    // const handelMaterial = (e) => {
-    //     setMaterials(e.target.files)
-    // }
-
-    const fileComponent = useRef();
-    const handelUpload = async (e) => {
-        e.preventDefault()
-        console.log(fileComponent.current.files)
-
-        // if(!materials) {
-        //     alert('Выберете файл');
-        //     return;
-        // }
-
-        // const formData = new FormData();
+    function handleChange(event) {
+        setFile(event.target.files[0])
     }
 
+    function handleSubmit(event) {
+        event.preventDefault()
+        const url = 'http://127.0.0.1:8000/api/courses';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('fileName', file.name);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+            },
+        };
+        axios.post(url, formData, config).then((response) => {
+            console.log(response.data);
+        });
+
+    }
+
+
+
     return (
-        <div>
-            <input ref={fileComponent} type="file" multiple/>
-            <button onClick={handelUpload}>add</button>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <h1>React File Upload</h1>
+            <input type="file" onChange={handleChange}/>
+            <button type="submit">Upload</button>
+        </form>
     );
 };
 
