@@ -16,6 +16,7 @@ class MaterialResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'material' => $this->material,
             'created_at' => $this->created_at,
         ];
