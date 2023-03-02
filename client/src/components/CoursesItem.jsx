@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import {deleteCourses} from "../store/slices/coursesSlice";
+import {Link} from "react-router-dom";
 
 const CoursesItem = ({title, id}) => {
 
@@ -13,7 +14,6 @@ const CoursesItem = ({title, id}) => {
         }
     }
 
-
     return (
         <div>
             <div className="courses">
@@ -22,7 +22,7 @@ const CoursesItem = ({title, id}) => {
                 </div>
 
                 <div className="courses_btn">
-                    <button>show</button>
+                    <Link to={`/show/${id}`}>show</Link>
                     <button>edit</button>
                     <button onClick={() => removeCourses(id)}>delete</button>
                 </div>

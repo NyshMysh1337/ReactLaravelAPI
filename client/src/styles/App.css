@@ -21,3 +21,15 @@
   margin-top: 15px;
   align-items: center;
 }
+
+.form-content {
+  width: 500px;
+}
+
+.form-content-input {
+  width: 500px;
+}
+
+.hours {
+  width: 100px;
+}

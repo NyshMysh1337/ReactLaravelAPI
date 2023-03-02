@@ -71,6 +71,8 @@ export const addCourses = createAsyncThunk(
     }
 )
 
+
+
 const setError = (state, action) => {
     state.status = 'rejected'
     state.error = action.payload

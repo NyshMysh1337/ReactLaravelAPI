@@ -7,10 +7,12 @@ use App\Services\Courses\Service;
 
 class BaseController extends Controller
 {
-    public $service;
+    public $serviceCourses;
+    public $serviceMaterial;
 
-    public function __construct(Service $service)
+    public function __construct(Service $serviceCourses, \App\Services\Materials\Service $serviceMaterial)
     {
-        $this->service = $service;
+        $this->serviceCourses = $serviceCourses;
+        $this->serviceMaterial = $serviceMaterial;
     }
 }

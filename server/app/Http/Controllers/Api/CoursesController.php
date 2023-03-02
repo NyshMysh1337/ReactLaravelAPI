@@ -22,7 +22,6 @@ class CoursesController extends BaseController
     {
 
         return CoursesResource::collection(Courses::with('materials')->get());
-//        $this->service->index();
     }
 
     /**
@@ -35,9 +34,7 @@ class CoursesController extends BaseController
     {
         $courses = Courses::create($request->validated());
 
-
         return new CoursesResource($courses);
-//        $this->service->store($request);
     }
 
     /**
