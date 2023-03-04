@@ -3,6 +3,7 @@
 namespace App\Services\Materials;
 
 use App\Models\Material;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class Service
@@ -17,5 +18,16 @@ class Service
             'material' => $path,
             'name' => $request->name
         ]);
+    }
+
+    public function destroy($id) {
+        $material = Material::findOrFail($id);
+
+        Storage::disk('public')->delete($material->material);
+
+        $material->delete();
+
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

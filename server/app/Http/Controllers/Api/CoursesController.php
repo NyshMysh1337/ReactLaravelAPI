@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Courses\StoreRequest;
+use App\Http\Requests\Courses\UpdateRequest;
 use App\Http\Resources\CoursesResource;
 use App\Models\Courses;
 use App\Models\Material;
@@ -55,9 +56,11 @@ class CoursesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $courses = Courses::findOrFail($id)->update($data);
+        return $courses;
     }
 
     /**

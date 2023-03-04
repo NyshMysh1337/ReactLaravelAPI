@@ -21,3 +21,4 @@ Route::apiResources([
 ]);
 
 Route::post('/material/create', [MaterialController::class, 'add']);
+Route::delete('/material/destroy/{id}', [MaterialController::class, 'destroy']);

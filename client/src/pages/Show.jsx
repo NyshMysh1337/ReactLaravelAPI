@@ -19,13 +19,11 @@ const Show = () => {
         <div>
             {course ? (
                 <div>
-                    {/*show: {course.id}*/}
-                    {/*courses: {course.title}*/}
-
                     {
                         course.materials.map(el => {
                             return <>
                                 <img style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
+                                <a href={require(`./../../../server/public/storage/${el.material}`)} download>Скачать</a>
                                 {el.name}
                             </>
                         })
