@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {addCourses} from "../store/slices/coursesSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Form = () => {
+const FormCreate = () => {
 
     const dispatch = useDispatch();
 
@@ -157,4 +157,4 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default FormCreate;

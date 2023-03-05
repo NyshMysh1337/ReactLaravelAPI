@@ -23,7 +23,7 @@ const CoursesItem = ({title, id}) => {
 
                 <div className="courses_btn">
                     <Link to={`/show/${id}`}>show</Link>
-                    <button>edit</button>
+                    <Link to={`/edit/${id}`}>edit</Link>
                     <button onClick={() => removeCourses(id)}>delete</button>
                 </div>
             </div>

@@ -23,7 +23,8 @@
 }
 
 .form-content {
-  width: 500px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .form-content-input {

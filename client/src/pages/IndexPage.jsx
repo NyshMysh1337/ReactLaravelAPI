@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Form from "../components/Form";
+import Form from "../components/FormCreate";
 import CoursesItem from "../components/CoursesItem";
 import Pagination from "../components/Pagination";
 import {useDispatch, useSelector} from "react-redux";

@@ -1,9 +1,10 @@
 import React from 'react';
+import FormUpdate from "../components/FormUpdate";
 
 const Update = () => {
     return (
         <div>
-            update
+            <FormUpdate />
         </div>
     );
 };
