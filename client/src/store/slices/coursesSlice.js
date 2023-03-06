@@ -2,7 +2,6 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 
 const initialState = {
     courses: [],
-    // coursesOne: {},
     status: null,
     error: null
 }
@@ -46,24 +45,6 @@ export const deleteCourses = createAsyncThunk(
     }
 );
 
-export const deleteMaterial = createAsyncThunk(
-    'courses/deleteMaterial',
-    async function(id, {rejectWithValue}) {
-        try{
-            const response = await fetch(`http://127.0.0.1:8000/api/material/destroy/${id}`, {
-                method: 'DELETE'
-            })
-
-            if (!response.ok) {
-                throw new Error('Can\'t delete courses. Server error!');
-            }
-
-        } catch (error) {
-            return rejectWithValue(error.message)
-        }
-    }
-);
-
 export const addCourses = createAsyncThunk(
     'courses/addCourses',
     async function(courses, {rejectWithValue, dispatch}) {
@@ -92,7 +73,7 @@ export const addCourses = createAsyncThunk(
 
 export const upDateCourses = createAsyncThunk(
     'courses/upDateCourses',
-    async function(courses, {rejectWithValue, dispatch}) {
+    async function(courses, {rejectWithValue}) {
         try{
             const response = await fetch(`http://127.0.0.1:8000/api/courses/${courses.id}`, {
                 method: 'PUT',
@@ -130,10 +111,6 @@ const coursesSlice = createSlice({
         createCourses: (state, action) => {
             state.courses.push(action.payload);
             },
-        // getCourses: (state, action) => {
-        //     // console.log(action.payload)
-        //   state.coursesOne = state.courses.find(el => el.id == action.payload)
-        // },
         removeCourses: (state, action) => {
             state.courses = state.courses.filter(el => {
                 return el.id !== action.payload.id
@@ -151,7 +128,6 @@ const coursesSlice = createSlice({
         },
         [fetchCourses.rejected]: setError,
         [deleteCourses.rejected]: setError,
-        [deleteMaterial.rejected]: setError,
         [upDateCourses.rejected]: setError,
     }
 });

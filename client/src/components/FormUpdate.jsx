@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {addCourses, deleteMaterial, upDateCourses} from "../store/slices/coursesSlice";
+import {upDateCourses} from "../store/slices/coursesSlice";
 import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
+import {deleteMaterial, updateMaterial} from "../store/slices/materialsSlice";
 
 const FormUpdate = () => {
 
@@ -19,11 +20,10 @@ const FormUpdate = () => {
         fetch(`http://127.0.0.1:8000/api/courses/${id}`)
             .then(res => res.json())
             .then(res => setCourse(res.data));
-        // setLoading(false)
     }, [id, dispatch])
 
 
-    const postForm = async (data) => {
+    const updateForm = async (data) => {
         const formData = new FormData();
 
         const upDateCourse = {
@@ -31,8 +31,8 @@ const FormUpdate = () => {
             id
         }
 
-        const addingCourses = await dispatch(upDateCourses(upDateCourse));
-        // const {id} = addingCourses.payload.data;
+        await dispatch(upDateCourses(upDateCourse));
+
 
         for (let i = 0; i < data.materials.length; i++) {
             formData.append('courses_id', id);
@@ -58,7 +58,7 @@ const FormUpdate = () => {
         {
         course ? (
             <div  className={'form-content'}>
-    <form onSubmit={handleSubmit(postForm)} encType="multipart/form-data">
+    <form onSubmit={handleSubmit(updateForm)} encType="multipart/form-data">
         <div>
             <label>
                 Заголовок:
@@ -183,7 +183,8 @@ const FormUpdate = () => {
                     return (<div key={el.id}>
                             <img style={{width: 200}} src={require(`./../../../server/public/storage/${el.material}`)}/>
                             <button onClick={() => removeMaterial(el.id)}>delete</button>
-                            {el.name}
+                            <input type="text" defaultValue={el.name} name={'name'}/>
+
                     </div>)
                 }) : ''
                 }

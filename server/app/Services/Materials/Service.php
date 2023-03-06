@@ -30,4 +30,9 @@ class Service
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function update($id, $request) {
+        $data = $request->validated();
+        Material::findOrFail($id)->update($data);
+    }
 }

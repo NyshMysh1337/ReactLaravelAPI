@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getCourses} from "../store/slices/coursesSlice";
 
@@ -18,6 +18,7 @@ const Show = () => {
 
     return (
         <div>
+            <Link to={'/'}>Главная</Link>
                 <div>
                     {
                         course ?

@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'materials' => 'required|array'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'materials.required' => 'Это поле обязательно!',
+            'name.required' => 'Это поле обязательно!'
         ];
     }
 }

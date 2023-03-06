@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string',
             'materials' => 'required|array'
         ];
     }
@@ -31,7 +32,8 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'materials.required' => 'Это поле обязательно!'
+            'materials.required' => 'Это поле обязательно!',
+            'name.required' => 'Это поле обязательно!'
         ];
     }
 }
