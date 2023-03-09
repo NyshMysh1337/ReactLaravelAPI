@@ -14,23 +14,12 @@ class Service
     }
     public function store($request) {
         $courses = Courses::create($request->validated());
-
-        if ($request->hasfile('materials')) {
-            foreach ($request->file('materials') as $file) {
-                $path = Storage::disk('public')->put('materials', $file);
-                time() . "_" . uniqid() . "_" . $file->getClientOriginalName();
-
-                Material::create([
-                    'courses_id' => $courses->id,
-                    'material' => $path
-                ]);
-            }
-        }
-
-        return new CoursesResource($courses);
+        return $courses;
     }
 
-    public function update() {
-
+    public function update($request, $id) {
+        $data = $request->validated();
+        $courses = Courses::findOrFail($id)->update($data);
+        return $courses;
     }
 }

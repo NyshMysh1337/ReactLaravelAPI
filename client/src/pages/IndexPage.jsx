@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Pagination from "../components/Pagination";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchCourses} from "../store/slices/coursesSlice";
+import {fetchCourses, sortCourse} from "../store/slices/coursesSlice";
 import {Link} from "react-router-dom";
 import CoursesList from "../components/CoursesList";
 
@@ -11,6 +11,7 @@ const IndexPage = () => {
     const {courses, error, status} = useSelector(state => state.courses)
     const [currentPage, setCurrentPage] = useState(1);
     const [coursesPerPage, setCoursesPerPage] = useState(10);
+    const [order, setOrder] = useState('ASC');
 
     useEffect(() => {
         dispatch(fetchCourses());
@@ -19,6 +20,26 @@ const IndexPage = () => {
     const lastIndexCourses = currentPage * coursesPerPage;
     const firstCoursesIndex = lastIndexCourses - coursesPerPage;
     const currentCourses = courses.slice(firstCoursesIndex, lastIndexCourses);
+
+     const sortBy = () => {
+         if (order === 'ASC') {
+         const sortCourses = [...courses].sort((a, b) => {
+                 return a.title > b.title ? 1 : -1
+             })
+             dispatch(sortCourse(sortCourses))
+             setOrder('DESC')
+         }
+
+         if (order === 'DESC') {
+             const sortCourses = [...courses].sort((a, b) => {
+                 return a.title < b.title ? 1 : -1
+             })
+             dispatch(sortCourse(sortCourses))
+             setOrder('ASC')
+         }
+     }
+
+
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -32,6 +53,8 @@ const IndexPage = () => {
                 <option value={50}>50</option>
                 <option value={100}>100</option>
             </select>
+
+            <button onClick={sortBy}>По названию</button>
 
 
             <CoursesList currentCourses={currentCourses} />

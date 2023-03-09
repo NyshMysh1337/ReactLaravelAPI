@@ -18,12 +18,6 @@ class MaterialController extends BaseController
     }
 
     public function update(Request $request, $id) {
-        $data = $request->validate([
-            'name' => 'required'
-        ]);
-        $course = Material::findOrFail($id);
-//        return $course;
-        $course->update($data);
-//        $this->serviceMaterial->update($id, $request);
+        $this->serviceMaterial->update($id, $request);
     }
 }

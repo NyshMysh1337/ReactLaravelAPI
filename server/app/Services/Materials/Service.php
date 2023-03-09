@@ -32,7 +32,10 @@ class Service
     }
 
     public function update($id, $request) {
-        $data = $request->validated();
-        Material::findOrFail($id)->update($data);
+        $data = $request->validate([
+            'name' => 'required'
+        ]);
+        $course = Material::findOrFail($id);
+        $course->update($data);
     }
 }

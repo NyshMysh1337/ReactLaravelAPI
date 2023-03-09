@@ -13,6 +13,8 @@ const FormCreate = () => {
 
         const addingCourses = await dispatch(addCourses(data));
         const {id} = addingCourses.payload.data;
+        console.log(id)
+        debugger
 
         for (let i = 0; i < data.materials.length; i++) {
             formData.append('courses_id', id);

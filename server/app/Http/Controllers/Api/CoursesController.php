@@ -21,7 +21,6 @@ class CoursesController extends BaseController
      */
     public function index()
     {
-
         return CoursesResource::collection(Courses::with('materials')->get());
     }
 
@@ -33,8 +32,7 @@ class CoursesController extends BaseController
      */
     public function store(StoreRequest $request)
     {
-        $courses = Courses::create($request->validated());
-
+        $courses = $this->serviceCourses->store($request);
         return new CoursesResource($courses);
     }
 
@@ -58,9 +56,7 @@ class CoursesController extends BaseController
      */
     public function update(UpdateRequest $request, $id)
     {
-        $data = $request->validated();
-        $courses = Courses::findOrFail($id)->update($data);
-        return $courses;
+        $this->serviceCourses->update($request, $id);
     }
 
     /**

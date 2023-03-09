@@ -115,6 +115,9 @@ const coursesSlice = createSlice({
             state.courses = state.courses.filter(el => {
                 return el.id !== action.payload.id
             })
+        },
+        sortCourse: (state, action) => {
+            state.courses = action.payload
         }
     },
     extraReducers: {
@@ -132,5 +135,5 @@ const coursesSlice = createSlice({
     }
 });
 
-export const {removeCourses, createCourses} = coursesSlice.actions
+export const {removeCourses, createCourses, sortCourse} = coursesSlice.actions
 export default coursesSlice.reducer;
