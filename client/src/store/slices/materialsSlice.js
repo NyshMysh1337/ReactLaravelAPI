@@ -19,7 +19,6 @@ export const updateMaterial = createAsyncThunk(
                     body: JSON.stringify(material.data)
                 })
 
-
             if (!response.ok) {
                 throw new Error('Can\'t add material. Server error!');
             }

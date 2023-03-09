@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Form from "../components/FormCreate";
-import CoursesItem from "../components/CoursesItem";
 import Pagination from "../components/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCourses} from "../store/slices/coursesSlice";
 import {Link} from "react-router-dom";
+import CoursesList from "../components/CoursesList";
 
 const IndexPage = () => {
 
@@ -25,9 +24,7 @@ const IndexPage = () => {
 
     return (
         <div>
-
             <Link to={'/create'}>Создать пост</Link>
-
 
             <select onChange={(e) => setCoursesPerPage(e.target.value)}>
                 <option value={10}>10</option>
@@ -36,21 +33,17 @@ const IndexPage = () => {
                 <option value={100}>100</option>
             </select>
 
-            {
-                currentCourses.map((obj, i) => {
-                    return <CoursesItem key={i} title={obj.title} id={obj.id}/>
-                })
-            }
+
+            <CoursesList currentCourses={currentCourses} />
+
+            {status === 'loading' && <h2>Loading...</h2>}
+            {error && <h2>An error: {error}</h2>}
 
             <Pagination
                 totalCourses={courses.length}
                 coursesPerPage={coursesPerPage}
                 paginate={paginate}
             />
-
-
-            {status === 'loading' && <h2>Loading...</h2>}
-            {error && <h2>An error: {error}</h2>}
         </div>
     );
 };
