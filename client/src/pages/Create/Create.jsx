@@ -1,14 +1,15 @@
 import React from 'react';
-import FormUpdate from "../components/FormUpdate";
+import FormCreate from "../../components/FormCreate";
 import {Link} from "react-router-dom";
+import style from './style.module.css'
 
-const Update = () => {
+const Create = () => {
     return (
         <div>
             <Link to={'/'}>Главная</Link>
-            <FormUpdate />
+            <FormCreate />
         </div>
     );
 };
 
-export default Update;
+export default Create;

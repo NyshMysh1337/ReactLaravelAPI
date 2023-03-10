@@ -1,15 +1,9 @@
 import './styles/App.css';
-import CoursesItem from "./components/CoursesItem";
-import {useEffect, useState} from "react";
-import {fetchCourses} from "./store/slices/coursesSlice";
-import {useDispatch, useSelector} from "react-redux";
 import {Link, Route, Routes} from "react-router-dom";
-import Form from "./components/FormCreate";
-import Create from "./pages/Create";
-import Update from "./pages/Update";
-import Pagination from "./components/Pagination";
-import IndexPage from "./pages/IndexPage";
-import Show from "./pages/Show";
+import Create from "./pages/Create/Create";
+import Update from "./pages/Update/Update";
+import IndexPage from "./pages/IndexPage/IndexPage";
+import Show from "./pages/Show/Show";
 
 
 function App() {

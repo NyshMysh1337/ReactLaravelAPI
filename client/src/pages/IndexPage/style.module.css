@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.linkForm {
+    color: black;
+    border: 1px solid black;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.linkForm:hover {
+    color: #2b2b2b;
+    background-color: #e2e8f0;
+}
+
+.sortButton {
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+}
+
+.sortButton:hover {
+    color: #2b2b2b;
+    background-color: #e2e8f0;
+}
+
+.paginate {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.loadingSpinner{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}

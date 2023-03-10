@@ -10,15 +10,13 @@ const Material = ({course, isUpdate}) => {
         window.location.reload();
     }
 
-    console.log(123);
-
     return (
         <>
             {
                 isUpdate ? (
                     course.map(el => {
                         return <div key={el.id}>
-                            <img style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
+                            <img alt={'Тут находяться ваши материалы'} style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
                             <button onClick={() => removeMaterial(el.id)}>delete</button>
                             <input type="text" defaultValue={el.name} name={'name'}/>
                         </div>
@@ -26,7 +24,7 @@ const Material = ({course, isUpdate}) => {
                 ) : (
                     course.map(el => {
                         return <div key={el.id}>
-                            <img style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
+                            <img alt={'Тут находяться ваши материалы'} style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
                             <a href={require(`./../../../server/public/storage/${el.material}`)} download>Скачать</a>
                             {el.name}
                         </div>

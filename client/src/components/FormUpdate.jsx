@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {upDateCourses} from "../store/slices/coursesSlice";
 import {useForm} from "react-hook-form";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {deleteMaterial, updateMaterial} from "../store/slices/materialsSlice";
 import FormComponent from "./FormComponent";
 import Material from "./Material";
@@ -13,11 +13,7 @@ const FormUpdate = () => {
     const {id} = useParams();
     const [course, setCourse] = useState(null);
     const dispatch = useDispatch();
-
-    const removeMaterial = async (id) => {
-       await dispatch(deleteMaterial(id));
-       window.location.reload();
-    }
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/courses/${id}`)
@@ -48,6 +44,8 @@ const FormUpdate = () => {
             })
         }
     }
+
+    navigate(-1);
     }
 
     return (

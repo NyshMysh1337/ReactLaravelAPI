@@ -1,20 +1,20 @@
 import React from 'react';
-import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {addCourses} from "../store/slices/coursesSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FormComponent from "./FormComponent";
+import {useNavigate} from "react-router-dom";
 
 const FormCreate = () => {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const postForm = async (data) => {
         const formData = new FormData();
 
         const addingCourses = await dispatch(addCourses(data));
         const {id} = addingCourses.payload.data;
-        console.log(id)
-        debugger
 
         for (let i = 0; i < data.materials.length; i++) {
             formData.append('courses_id', id);
@@ -25,6 +25,8 @@ const FormCreate = () => {
                 body: formData
             })
         }
+
+        navigate(-1);
     }
 
     return (

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-import Material from "../components/Material";
+import Material from "../../components/Material";
 
 const Show = () => {
     const {id} = useParams();
