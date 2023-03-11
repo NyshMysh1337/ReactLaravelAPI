@@ -1,11 +1,11 @@
 import React from 'react';
 import FormUpdate from "../../components/FormUpdate";
-import {Link} from "react-router-dom";
+import MyLink from "../../components/UI/MyLink/MyLink";
 
 const Update = () => {
     return (
         <div>
-            <Link to={'/'}>Главная</Link>
+            <MyLink way={'/'}>Главная</MyLink>
             <FormUpdate />
         </div>
     );

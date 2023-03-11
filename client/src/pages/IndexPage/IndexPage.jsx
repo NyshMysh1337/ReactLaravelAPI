@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import Pagination from "../../components/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCourses, sortCourse} from "../../store/slices/coursesSlice";
-import {Link} from "react-router-dom";
 import CoursesList from "../../components/CoursesList";
 import style from './style.module.css'
 import {Spinner} from "react-bootstrap";
+import MyLink from "../../components/UI/MyLink/MyLink";
+import MyButton from "../../components/UI/MyButton/MyButton";
 
 const IndexPage = () => {
 
@@ -23,7 +24,7 @@ const IndexPage = () => {
     const firstCoursesIndex = lastIndexCourses - coursesPerPage;
     const currentCourses = courses.slice(firstCoursesIndex, lastIndexCourses);
 
-     const sortBy = () => {
+     const sortByName = () => {
          if (order === 'ASC') {
          const sortCourses = [...courses].sort((a, b) => {
                  return a.title > b.title ? 1 : -1
@@ -42,23 +43,23 @@ const IndexPage = () => {
      }
 
 
-
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
         <div>
             <div className={style.header}>
-                <Link  to={'/create'}>Создать пост</Link>
-
-                <select onChange={(e) => setCoursesPerPage(e.target.value)}>
-                    <option value={10}>10</option>
-                    <option value={20}>20</option>
-                    <option value={50}>50</option>
-                    <option value={100}>100</option>
-                </select>
+                <MyLink way={'/create'}>Создать курс</MyLink>
 
                 <div>
-                    <span>Фильтрация </span> <button className={style.sortButton} onClick={sortBy}>По названию</button>
+                    Количество строк:
+                    <select style={{marginRight: 30}} onChange={(e) => setCoursesPerPage(e.target.value)}>
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={50}>50</option>
+                        <option value={100}>100</option>
+                    </select>
+
+                    <span>Фильтрация </span> <MyButton onClick={sortByName}>по названию</MyButton>
                 </div>
             </div>
 

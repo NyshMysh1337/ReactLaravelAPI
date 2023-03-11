@@ -1,0 +1,12 @@
+.materials {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    align-items: center;
+}
+
+.content {
+    margin-top: 20px;
+    width: 900px;
+    overflow-wrap: break-word;
+}

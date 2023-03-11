@@ -1,12 +1,11 @@
 import React from 'react';
 import FormCreate from "../../components/FormCreate";
-import {Link} from "react-router-dom";
-import style from './style.module.css'
+import MyLink from "../../components/UI/MyLink/MyLink";
 
 const Create = () => {
     return (
         <div>
-            <Link to={'/'}>Главная</Link>
+            <MyLink way={'/'}>Главная</MyLink>
             <FormCreate />
         </div>
     );

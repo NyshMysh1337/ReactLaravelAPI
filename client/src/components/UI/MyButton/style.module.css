@@ -1,0 +1,20 @@
+.deleteButton {
+    color: tomato;
+    border: 1px solid tomato;
+    padding: 5px;
+}
+
+.deleteButton:hover {
+    background-color: white;
+}
+
+.standardButton {
+    color: black;
+    background-color: white;
+    border: 1px solid ;
+    padding: 5px;
+}
+
+.standardButton:hover {
+    background-color: #e2e8f0;
+}

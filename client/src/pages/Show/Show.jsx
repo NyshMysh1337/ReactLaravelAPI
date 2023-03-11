@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Material from "../../components/Material";
+import {Spinner} from "react-bootstrap";
+import MyLink from "../../components/UI/MyLink/MyLink";
+import style from './style.module.css'
 
 const Show = () => {
     const {id} = useParams();
@@ -15,14 +18,25 @@ const Show = () => {
 
     return (
         <div>
-            <Link to={'/'}>Главная</Link>
+            <MyLink way={'/'}>Главная</MyLink>
                 <div>
                     {
                         course
                             ?
-                                <Material course={course.materials} />
+                                <div className={style.content}>
+                                    <h1>{course.title}</h1>
+                                    <p>Описание курса: {course.description}</p> <br/>
+                                    <span style={{marginTop: 10}}>Срок обучения в часах: {course.duration_h}</span>
+                                    <div className={style.materials}>
+                                        <Material course={course.materials} />
+                                    </div>
+                                </div>
                             :
-                                <h1>Loading...</h1>
+                                <div style={{marginTop: 80}}>
+                                    <Spinner animation="border" role="status">
+                                        <span className='visually-hidden'>Loading...</span>
+                                    </Spinner>
+                                </div>
                     }
                 </div>
         </div>

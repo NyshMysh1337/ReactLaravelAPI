@@ -7,6 +7,8 @@ import {deleteMaterial, updateMaterial} from "../store/slices/materialsSlice";
 import FormComponent from "./FormComponent";
 import Material from "./Material";
 import MaterialList from "./MaterialList";
+import {Spinner} from "react-bootstrap";
+import MyButton from "./UI/MyButton/MyButton";
 
 const FormUpdate = () => {
 
@@ -22,8 +24,12 @@ const FormUpdate = () => {
     }, [id, dispatch])
 
 
-    const updateForm = async (data) => {
+    const removeMaterial = async (id) => {
+        await dispatch(deleteMaterial(id));
+        window.location.reload();
+    }
 
+    const updateForm = async (data) => {
         const upDateCourse = {
             data,
             id
@@ -48,6 +54,10 @@ const FormUpdate = () => {
     navigate(-1);
     }
 
+    const upDateMaterial = () => {
+
+    }
+
     return (
         <div>
         {
@@ -57,20 +67,28 @@ const FormUpdate = () => {
             <div>
                 {
                     course.materials.length > 0 ?
-                        <MaterialList course={course} />
-                    // course.materials.map(el => {
-                    // return (<div key={el.id}>
-                    //             <img style={{width: 200}} src={require(`./../../../server/public/storage/${el.material}`)}/>
-                    //             <button onClick={() => removeMaterial(el.id)}>delete</button>
-                    //             <input type="text" defaultValue={el.name} name={'name'}/>
-                    //         </div>)
-                // })
+                        // <MaterialList course={course} />
+                    course.materials.map(el => {
+
+                    return (<form className='materials-card' key={el.id}>
+                            <img alt={'Тут находяться ваши материалы'} style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
+                            <MyButton isDelete={true} onClick={() => removeMaterial(el.id)}>&times;</MyButton>
+                            <label className='input-name'>
+                            Имя файла:<br/>
+                            <input type="text" defaultValue={el.name} name={'name'}/>
+                        </label>
+                    </form>)
+                    })
                 : ''
                 }
             </div>
 
             </div>)
-            : <h1>Loading...</h1>
+            : <div style={{marginTop: 80}}>
+                <Spinner animation="border" role="status">
+                    <span className='visually-hidden'>Loading...</span>
+                </Spinner>
+            </div>
 }
         </div>
 
