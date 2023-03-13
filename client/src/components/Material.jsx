@@ -6,6 +6,7 @@ import MyButton from "./UI/MyButton/MyButton";
 const Material = ({course, isUpdate}) => {
 
     const dispatch = useDispatch();
+
     const removeMaterial = async (id) => {
         await dispatch(deleteMaterial(id));
         window.location.reload();

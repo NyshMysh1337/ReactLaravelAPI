@@ -9,6 +9,7 @@ import Material from "./Material";
 import MaterialList from "./MaterialList";
 import {Spinner} from "react-bootstrap";
 import MyButton from "./UI/MyButton/MyButton";
+import FormUpdateMaterial from "./FormUpdateMaterial";
 
 const FormUpdate = () => {
 
@@ -54,8 +55,14 @@ const FormUpdate = () => {
     navigate(-1);
     }
 
-    const upDateMaterial = () => {
+    const upDateMaterialSubmit = async (data, materialId) => {
 
+        const material = {
+            data,
+            id: materialId
+        }
+
+        dispatch(updateMaterial(material))
     }
 
     return (
@@ -70,14 +77,11 @@ const FormUpdate = () => {
                         // <MaterialList course={course} />
                     course.materials.map(el => {
 
-                    return (<form className='materials-card' key={el.id}>
-                            <img alt={'Тут находяться ваши материалы'} style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
-                            <MyButton isDelete={true} onClick={() => removeMaterial(el.id)}>&times;</MyButton>
-                            <label className='input-name'>
-                            Имя файла:<br/>
-                            <input type="text" defaultValue={el.name} name={'name'}/>
-                        </label>
-                    </form>)
+                    return (
+                        <div key={el.id}>
+                            <FormUpdateMaterial upDateMaterialSubmit={upDateMaterialSubmit} removeMaterial={removeMaterial} el={el}/>
+                        </div>
+                    )
                     })
                 : ''
                 }

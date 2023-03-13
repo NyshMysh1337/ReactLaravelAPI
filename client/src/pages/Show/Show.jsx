@@ -26,7 +26,8 @@ const Show = () => {
                                 <div className={style.content}>
                                     <h1>{course.title}</h1>
                                     <p>Описание курса: {course.description}</p> <br/>
-                                    <span style={{marginTop: 10}}>Срок обучения в часах: {course.duration_h}</span>
+                                    <span style={{marginTop: 10}}>Срок обучения в часах: {course.duration_h}</span><br/>
+                                    <span style={{marginTop: 10}}>Ссылка на <a href={course.hyper_link}>материалы</a></span>
                                     <div className={style.materials}>
                                         <Material course={course.materials} />
                                     </div>
