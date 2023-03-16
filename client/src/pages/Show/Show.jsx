@@ -16,6 +16,8 @@ const Show = () => {
             .then(res => setCourse(res.data));
     }, [id])
 
+    console.log('render')
+
     return (
         <div>
             <MyLink way={'/'}>Главная</MyLink>

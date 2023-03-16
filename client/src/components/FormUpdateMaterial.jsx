@@ -1,8 +1,12 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import MyButton from "./UI/MyButton/MyButton";
+import {deleteMaterial} from "../store/slices/materialsSlice";
+import {useDispatch} from "react-redux";
 
-const FormUpdateMaterial = ({upDateMaterialSubmit, removeMaterial, el}) => {
+const FormUpdateMaterial = ({upDateMaterialSubmit, el}) => {
+
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -12,12 +16,17 @@ const FormUpdateMaterial = ({upDateMaterialSubmit, removeMaterial, el}) => {
         handleSubmit
     } = useForm();
 
+    const removeMaterial = async (id) => {
+        await dispatch(deleteMaterial(id));
+        window.location.reload();
+    }
+
     return (
         <form className='materials-card' key={el.id} onSubmit={handleSubmit(data => upDateMaterialSubmit(data, el.id))}>
                 <img alt={'Тут находяться ваши материалы'} style={{width: 200}} src={require(`./../../../server/storage/app/public/${el.material}`)}/>
-                <MyButton isDelete={true} onClick={() => removeMaterial(el.id)}>&times;</MyButton>
+                <MyButton isDelete={true} onClick={() => removeMaterial(el.id)}>Удалить</MyButton>
                 <label className='input-name'>
-                    Имя файла:<br/>
+                    Имя материала:<br/>
                     <input type="text"
                            defaultValue={el.name}
                            {...register('name', {
@@ -31,7 +40,7 @@ const FormUpdateMaterial = ({upDateMaterialSubmit, removeMaterial, el}) => {
                 </label>
                 <div style={{height: 40}}>
                     {errors?.name &&
-                        <p style={{color: 'red'}}>{errors?.name?.message || "Error!"}</p>
+                        <p className='error-message'>{errors?.name?.message || "Error!"}</p>
                     }
                 </div>
                 <input type='submit'/>

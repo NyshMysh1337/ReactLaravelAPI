@@ -25,14 +25,14 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'materials' => 'required|array'
+//            'materials' => 'required|array'
         ];
     }
 
     public function messages()
     {
         return [
-            'materials.required' => 'Это поле обязательно!',
+//            'materials.required' => 'Это поле обязательно!',
             'name.required' => 'Это поле обязательно!'
         ];
     }

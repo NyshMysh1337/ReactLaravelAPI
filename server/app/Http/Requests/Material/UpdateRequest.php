@@ -25,15 +25,14 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'materials' => 'required|array'
         ];
     }
 
     public function messages()
     {
         return [
-            'materials.required' => 'Это поле обязательно!',
-            'name.required' => 'Это поле обязательно!'
+            'name.required' => 'Это поле обязательно!',
+            'name.string' => 'Это поле должно быть строкой!'
         ];
     }
 }

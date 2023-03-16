@@ -1,15 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {upDateCourses} from "../store/slices/coursesSlice";
-import {useForm} from "react-hook-form";
 import {useNavigate, useParams} from "react-router-dom";
 import {deleteMaterial, updateMaterial} from "../store/slices/materialsSlice";
 import FormComponent from "./FormComponent";
-import Material from "./Material";
-import MaterialList from "./MaterialList";
 import {Spinner} from "react-bootstrap";
-import MyButton from "./UI/MyButton/MyButton";
 import FormUpdateMaterial from "./FormUpdateMaterial";
+import MaterialList from "./MaterialList";
 
 const FormUpdate = () => {
 
@@ -22,19 +19,15 @@ const FormUpdate = () => {
         fetch(`http://127.0.0.1:8000/api/courses/${id}`)
             .then(res => res.json())
             .then(res => setCourse(res.data));
+
     }, [id, dispatch])
-
-
-    const removeMaterial = async (id) => {
-        await dispatch(deleteMaterial(id));
-        window.location.reload();
-    }
 
     const updateForm = async (data) => {
         const upDateCourse = {
             data,
             id
         }
+
 
         await dispatch(upDateCourses(upDateCourse));
 
@@ -56,12 +49,10 @@ const FormUpdate = () => {
     }
 
     const upDateMaterialSubmit = async (data, materialId) => {
-
         const material = {
             data,
             id: materialId
         }
-
         dispatch(updateMaterial(material))
     }
 
@@ -76,10 +67,9 @@ const FormUpdate = () => {
                     course.materials.length > 0 ?
                         // <MaterialList course={course} />
                     course.materials.map(el => {
-
                     return (
                         <div key={el.id}>
-                            <FormUpdateMaterial upDateMaterialSubmit={upDateMaterialSubmit} removeMaterial={removeMaterial} el={el}/>
+                            <FormUpdateMaterial upDateMaterialSubmit={upDateMaterialSubmit} el={el}/>
                         </div>
                     )
                     })

@@ -3,6 +3,7 @@ import FormUpdate from "../../components/FormUpdate";
 import MyLink from "../../components/UI/MyLink/MyLink";
 
 const Update = () => {
+
     return (
         <div>
             <MyLink way={'/'}>Главная</MyLink>

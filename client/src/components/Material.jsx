@@ -7,6 +7,9 @@ const Material = ({course, isUpdate}) => {
 
     const dispatch = useDispatch();
 
+    console.log('render')
+
+
     const removeMaterial = async (id) => {
         await dispatch(deleteMaterial(id));
         window.location.reload();

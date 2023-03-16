@@ -30,7 +30,7 @@ const CoursesItem = ({title, id}) => {
                         <MyLink way={`/edit/${id}`}>edit</MyLink>
                     </div>
                     <div className={'courses_btn_content'}>
-                        <MyButton isDelete={true} onClick={() => removeCourses(id)}>delete</MyButton>
+                        <MyButton isDelete={true} onClick={() => removeCourses(id)}>&times;</MyButton>
                     </div>
                 </div>
             </div>

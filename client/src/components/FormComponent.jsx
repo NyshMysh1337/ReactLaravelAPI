@@ -13,12 +13,11 @@ const FormComponent = ({postForm, course}) => {
 
 
     return (
-        <form onSubmit={handleSubmit(postForm)} encType="multipart/form-data">
+        <form className='form-courses' onSubmit={handleSubmit(postForm)} encType="multipart/form-data">
             <div className='form-content'>
-                <label>
-                    Заголовок:
-                    <br/>
                     <input
+                        type='text'
+                        placeholder='Название курса'
                         defaultValue={course ? course.title : ''}
                         className="form-content-input"
                         {...register('title', {
@@ -29,7 +28,6 @@ const FormComponent = ({postForm, course}) => {
                             }
                         })}
                     />
-                </label>
                 <div style={{height: 40}}>
                     {errors?.title &&
                         <p style={{color: 'red'}}>{errors?.title?.message || "Error!"}</p>
@@ -38,10 +36,9 @@ const FormComponent = ({postForm, course}) => {
             </div>
 
             <div>
-                <label>
-                    Описание:
                     <br/>
                     <textarea
+                        placeholder='Описание курса'
                         defaultValue={course ? course.description : ''}
                         {...register('description', {
                             required: "Это поле обязательно для заполнения!",
@@ -52,7 +49,6 @@ const FormComponent = ({postForm, course}) => {
                         })}
                     >
                     </textarea>
-                </label>
                 <div style={{height: 40}}>
                     {errors?.description &&
                         <p style={{color: 'red'}}>{errors?.description?.message || "Error!"}</p>
@@ -62,12 +58,12 @@ const FormComponent = ({postForm, course}) => {
 
             <div>
                 <label>
-                    Количество часов:
+                    Срок обучения в часах
                     <br/>
                     <input
                         defaultValue={course ? course.duration_h : ''}
                         className="form-content-input hours"
-                        type={'number'}
+                        type='number'
                         {...register('duration_h', {
                             required: "Это поле обязательно для заполнения!",
                         })}
@@ -82,29 +78,29 @@ const FormComponent = ({postForm, course}) => {
 
 
             <div>
-                <label>
-                    Ссылка на видеоматериалы:
-                    <br/>
                     <input
+                        type='text'
+                        placeholder='Ссылка на видеоматериалы'
                         defaultValue={course ? course.hyper_link : ''}
                         className="form-content-input"
                         {...register('hyper_link', {
                             required: "Это поле обязательно для заполнения!",
                         })}
                     />
-                </label>
                 <div style={{height: 40}}>
                     {errors?.hyper_link &&
                         <p style={{color: 'red'}}>{errors?.hyper_link?.message || "Error!"}</p>
                     }
                 </div>
             </div>
+            <hr/>
 
             <div>
-                <label>
-                    Имя файла/файлов:
-                    <br/>
+                Материалы
+                <br/>
                     <input
+                        type='text'
+                        placeholder='Имя материала/материалов:'
                         className="form-content-input"
                         {...register('name', {
                             required: "Это поле обязательно для заполнения!",
@@ -114,20 +110,16 @@ const FormComponent = ({postForm, course}) => {
                             }
                         })}
                     />
-                </label>
             </div>
 
-            <div>
-                <label>
-                    Материалы:
-                    <br/>
+            <div style={{marginTop:10}}>
                     <input
+                        className='form-content-input'
                         type={'file'}
                         multiple
                         name='materials'
                         {...register('materials')}
                     />
-                </label>
             </div>
 
             <input type="submit" />

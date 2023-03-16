@@ -38,6 +38,38 @@
 
 .form-content-input {
   width: 500px;
+  padding:10px;
+  margin-top: 20px;
+  border-radius:10px;
+}
+
+.form-courses {
+  height: 600px;
+}
+
+textarea {
+  width:100%;
+  resize: vertical;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:150px;
+}
+
+input[type=text] {
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius:10px;
+}
+
+input[type=submit] {
+  padding: 10px;
+  border: 0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 .hours {
@@ -46,6 +78,7 @@
 
 .materials-card {
   display: flex;
+  width: 200px;
   flex-direction: column;
   margin-top: 30px;
   margin-left: 30px;
@@ -53,6 +86,11 @@
 
 .input-name {
   margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  word-break: break-all;
 }
 
 .link-download {

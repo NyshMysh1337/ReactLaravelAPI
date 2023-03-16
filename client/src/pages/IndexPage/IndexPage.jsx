@@ -24,7 +24,7 @@ const IndexPage = () => {
     const firstCoursesIndex = lastIndexCourses - coursesPerPage;
     const currentCourses = courses.slice(firstCoursesIndex, lastIndexCourses);
 
-     const sortByName = () => {
+    const sortByName = () => {
          if (order === 'ASC') {
          const sortCourses = [...courses].sort((a, b) => {
                  return a.title > b.title ? 1 : -1
@@ -41,7 +41,6 @@ const IndexPage = () => {
              setOrder('ASC')
          }
      }
-
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
